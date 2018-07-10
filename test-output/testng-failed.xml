@@ -5,7 +5,7 @@
     <classes>
       <class name="testquestion2.Test_MyCollection">
         <methods>
-          <include name="Test7_Collection_Length_Functionality"/>
+          <include name="Test4_DoubleCapacity"/>
         </methods>
       </class> <!-- testquestion2.Test_MyCollection -->
     </classes>

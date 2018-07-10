@@ -18,7 +18,6 @@ public class MyCollection implements DynamicArray {
 	 */
 	@SuppressWarnings("unused")
 	private String[] numArray;
-	ArrayList<String> arrayList;
 	 int addcount = 0;
 	
 	public MyCollection(int arraySize){
@@ -28,12 +27,10 @@ public class MyCollection implements DynamicArray {
 
 	public int search(String searchingNum) {
 		// TODO Auto-generated method stub
-		arrayList = new ArrayList<String>(Arrays.asList(numArray));
-		if(arrayList.contains(searchingNum))
-		{
-			return 1;
+		for(int i= 0;i<getCount();i++)	{
+			if(numArray[i] == searchingNum)
+				return 1;
 		}
-		
 		return -1;
 	}
 
@@ -41,80 +38,103 @@ public class MyCollection implements DynamicArray {
 		// TODO Auto-generated method stub
 	
 		for(int i = 0;i< numArray.length;i++) {
-			System.out.println(numArray[i]);
+			
 			if(numArray[i] == numberToAdd) {
 				return false;
 			}
 		}
-//		System.out.println(arrayList);
-//		if(arrayList.contains(numberToAdd)) {
-//			System.out.println(arrayList);
-//			System.out.println("returning false");
-//			
-//		}
+		
 		if(addcount < numArray.length) {
+			System.out.println("in the if");
 		numArray[addcount] = numberToAdd;
 		addcount++;
-		return true;}
+		
+		}
 		else {
-			arrayList = new ArrayList<String>(Arrays.asList(numArray));
-			arrayList.add(numberToAdd);
+			 doubleCapacity();
+		
+			numArray[addcount] = numberToAdd;
+			
+			
 			addcount++;
-		numArray	= arrayList.toArray(numArray);
-			return true;
+	
+			
 			
 		}
+		return true;
 		
-//		if(addcount <= arrayList.size()) {
-//		arrayList.add(addcount, numberToAdd);
-//		 if(arrayList.contains(numberToAdd)) {
-//			addcount++;
-//			System.out.println(addcount + "  " + arrayList.size());
-//			 System.out.println("returning true");
-//			
-//		}
-//		 return true;}
-//		else {
-//			arrayList.add(numberToAdd);
-//			return true;
-//		}
-		//return false;
+
 	}
 
 	public void doubleCapacity() {
 		// TODO Auto-generated method stub
-
+		 String[] tmp = new String[2*numArray.length];
+		    System.arraycopy(numArray,0,tmp,0,numArray.length); 
+		   numArray = tmp;
 	}
 
 	public boolean remove(String numberToRemove) {
 		// TODO Auto-generated method stub
-		arrayList = new ArrayList<String>(Arrays.asList(numArray));
-
-		if(arrayList.remove(numberToRemove)) {
-			numArray	= arrayList.toArray(numArray);
-			
-			return true;
-		}
-		return false;
+		int count =0;
+		  for(int i=0; i<numArray.length; i++)
+	       {
+	           if(numArray[i] == numberToRemove)
+	           {
+	               for(int j=i; j<(numArray.length-1); j++)
+	               {
+	            	   numArray[j] = numArray[j+1];
+	               }
+	               count++;
+	               break;
+	           }
+	       }
+	       if(count==0)
+	       {
+	         return false;
+	       }
+	       else
+	       {
+	           return true;
+	           
+	       }
 	}
 
 	public int getCount() {
 		// TODO Auto-generated method stub
-		System.out.println(arrayList);
+		//System.out.println(arrayList);
 		return numArray.length;
 	}
 
 	public String[] rotate(int n) {
 		// TODO Auto-generated method stub
-		return null;
+		for(int i = 0;i<numArray.length;i++) {
+			System.out.println(numArray[i]);
+		}
+		
+		leftRotate(numArray, n, numArray.length);
+		return numArray;
 	}
+	
+	  void leftRotate(String arr[], int d, int n) 
+	    {
+	        for (int i = 0; i < d; i++)
+	            leftRotatebyOne(arr, n);
+	    }
+	 
+	    void leftRotatebyOne(String arr[], int n) 
+	    {
+	        int i;String temp;
+	        temp = arr[0];
+	        for (i = 0; i < n - 1; i++)
+	            arr[i] = arr[i + 1];
+	        arr[i] = temp;
+	    }
+	 
+	
 	public String toString( ) {
-		//String str =String.join(", ", arrayList);
-		 System.out.println(arrayList);
+		
 		String str = "{";
-		//Iterator itr=arrayList.iterator(); 
-		//int size = arrayList.size();
-		 
+		
 		int count  = 0;
 		 for(int i = 0;i<numArray.length;i++){  
 			  count++;
@@ -122,11 +142,11 @@ public class MyCollection implements DynamicArray {
 			  String element = numArray[i];
 			 
 			  if(element != null) {
-				  if(count == numArray.length) {
+				  if(i == 0) {
 				  str = str + element;
 				  }
 				  else {
-					  str = str + element + ",";
+					  str = str+  "," + element ;
 				  }
 			  }
 		

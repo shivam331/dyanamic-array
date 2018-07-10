@@ -85,13 +85,13 @@ public class Test_MyCollection {
 		Reporter.log("[INFO] : Assertion Passed : Function returns -1 if entry is not present", true);
 	}
 	
-	//@Test(description="Left Rotation Collection Functionality")
+	@Test(description="Left Rotation Collection Functionality")
 	public void Test10_Rotate_Array(){
 		dynamicArray = new MyCollection(15);
 		dynamicArray.add("Automation");dynamicArray.add("Testing");dynamicArray.add("Is");dynamicArray.add("Always");
 		dynamicArray.add("A Fun.");
 		dynamicArray.rotate(2);
-		Assert.assertEquals(dynamicArray.toString(),"{Is, Always, A Fun., Sometimes, Automation, Testing}");
+		Assert.assertEquals(dynamicArray.toString(),"{Is,Always,A Fun.,Automation,Testing}");
 		Reporter.log("[INFO] : Assertion Passed : Rotation is working fine", true);
 	}
 }
